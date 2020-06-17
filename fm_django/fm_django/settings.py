@@ -25,7 +25,7 @@ SECRET_KEY = '-!66krn4dq7b81ej=)y&s6=z2b&ue3&lw8xo)^ts&bfgp4e90#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['54.90.37.27']
+ALLOWED_HOSTS = ['54.90.37.27','127.0.0.1']
 
 
 # Application definition
@@ -38,9 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
     'facility.apps.FacilityConfig',
-    'corsheaders'
+    'customer.apps.CustomerConfig'
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -129,3 +139,9 @@ STATIC_URL = '/static/'
 
 CORS_ORIGIN_ALLOW_ALL = True
 # AUTH_USER_MODEL = 'facility.Facility'
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'customer.serializers.RegisterSerializer',
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
